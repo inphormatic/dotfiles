@@ -1,2 +1,2 @@
 # dotfiles
-🍚 Rice-ing Up! 🔥
+
