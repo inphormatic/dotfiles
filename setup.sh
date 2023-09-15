@@ -155,6 +155,10 @@ else
   cd .. && rm -rf alacritty
 fi
 
+log 'info' 'Including dotfiles...'
+cp -TRa ./leftwm/. "$HOME/.config/leftwm"
+cp -TRa ./rofi/. "$HOME/.config/rofi"
+
 
 # Oh-My-Zsh
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
