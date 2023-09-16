@@ -187,14 +187,6 @@ else
 fi
 
 
-log 'info' 'Including dotfiles...'
-cp -TRa ./leftwm/. "$HOME/.config/leftwm"
-cp -TRa ./picom/. "$HOME/.config/picom"
-cp -TRa ./rofi/. "$HOME/.config/rofi"
-cp -TRa ./polybar/. "$HOME/.config/polybar"
-cp -TRa ./alacritty/. "$HOME/.config/alacritty"
-
-
 # Oh-My-Zsh
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
   log 'warn' 'Oh-My-Zsh is aleady installed. Skipping!'
@@ -202,6 +194,16 @@ else
   log 'info' 'Installing Oh-My-Zsh...'
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
+
+
+# Dotfiles inclusion
+log 'info' 'Including dotfiles...'
+cp -TRa ./leftwm/. "$HOME/.config/leftwm"
+cp -TRa ./picom/. "$HOME/.config/picom"
+cp -TRa ./rofi/. "$HOME/.config/rofi"
+cp -TRa ./polybar/. "$HOME/.config/polybar"
+cp -TRa ./alacritty/. "$HOME/.config/alacritty"
+cp -a ./zsh/. "$HOME"
 
 
 
