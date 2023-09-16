@@ -19,22 +19,6 @@ log 'info' "Installing $PKGS ..."
 sudo $INSTALLER $PKGS > /dev/null
 
 
-# Nerd Fonts
-if [[ ! -d '/usr/share/fonts/JetBrainsMono' ]]; then
-  log 'info' 'Downloading JetBrainsMono Nerd Fonts...'
-  curl -sLO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
-
-  log 'info' 'Unzipping JetBrainsMono...'
-  unzip -q JetBrainsMono.zip -d JetBrainsMono
-  rm -rf JetBrainsMono.zip
-
-  log 'info' 'Installing JetBrainsMono...'
-  sudo mv JetBrainsMono /usr/share/fonts
-else
-  log 'warn' 'JetBrainsMono already present into /usr/share/fonts. Skipping!'
-fi
-
-
 # Developmet tools
 declare -r DISTRO=$(find_distro_name)
 declare -Ar DEV_TOOLS=(
@@ -54,6 +38,37 @@ if [[ "$?" == 0 ]]; then
 else
   log 'info' 'Installing Rust...'
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /dev/null | sh
+fi
+
+
+# Go
+command -v go > /dev/null
+if [[ "$?" == 0 ]]; then
+  log 'warn' 'Go is already installed. Skipping!'
+else
+  log 'info' 'Downloading Go...'
+  curl -sLO https://go.dev/dl/go1.21.1.linux-amd64.tar.gz
+
+  log 'info' 'Installing Go...'
+  tar xfz go1.21.1.linux-amd64.tar.gz
+  sudo mv go /usr/local
+  rm -rf go1.21.1.linux-amd64.tar.gz
+fi
+
+
+# Nerd Fonts
+if [[ ! -d '/usr/share/fonts/JetBrainsMono' ]]; then
+  log 'info' 'Downloading JetBrainsMono Nerd Fonts...'
+  curl -sLO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
+
+  log 'info' 'Unzipping JetBrainsMono...'
+  unzip -q JetBrainsMono.zip -d JetBrainsMono
+  rm -rf JetBrainsMono.zip
+
+  log 'info' 'Installing JetBrainsMono...'
+  sudo mv JetBrainsMono /usr/share/fonts
+else
+  log 'warn' 'JetBrainsMono already present into /usr/share/fonts. Skipping!'
 fi
 
 
