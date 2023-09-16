@@ -158,6 +158,7 @@ fi
 log 'info' 'Including dotfiles...'
 cp -TRa ./leftwm/. "$HOME/.config/leftwm"
 cp -TRa ./rofi/. "$HOME/.config/rofi"
+cp -TRa ./alacritty/. "$HOME/.config/alacritty"
 
 
 # Oh-My-Zsh
