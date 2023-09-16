@@ -50,7 +50,7 @@ if [ -x "$(command -v polybar)" ]; then
   pkill polybar
   monitors="$(polybar -m | sed s/:.*// | tac)"
   while read -r display; do
-    MONITOR=$display polybar -c "$HOME/.config/polybar/polybar.config" mainbar &> /dev/null &
+    MONITOR=$display polybar -c "$HOME/.config/polybar/polybar.ini" mainbar &> /dev/null &
   done <<< "$monitors"
   exit 0
 fi
