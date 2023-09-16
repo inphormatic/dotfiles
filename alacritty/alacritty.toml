@@ -1,0 +1,22 @@
+import = ["./theme.toml"]
+
+live_config_reload = true
+window.opacity = 1.0
+
+
+[shell]
+program = "/bin/zsh"
+
+
+[font]
+size = 12
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+
+[window.padding]
+x = 12
+y = 12
+
