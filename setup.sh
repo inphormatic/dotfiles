@@ -13,7 +13,7 @@ if [[ "$?" -ne 0 ]]; then
   exit 1
 fi
 
-declare -r PKGS='curl dunst feh nodejs picom polybar ripgrep rofi scdoc tmux unzip zsh'
+declare -r PKGS='curl dunst feh nnn nodejs picom polybar ripgrep rofi scdoc tmux unzip zsh'
 
 log 'info' "Installing $PKGS ..."
 sudo $INSTALLER $PKGS > /dev/null
