@@ -10,7 +10,7 @@ fi
 ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 
 # check if dunst is installed and if it is, copy the config
-if [ command -v dunst ]; then
+if [ -x "$(command -v dunst)" ]; then
   DUNSTDIR=$HOME/.config/dunst
   
   # create the config dir if nonexistant
@@ -31,31 +31,6 @@ if [ command -v dunst ]; then
   bash -c "killall dunst && dunst"
 fi
 
-# Install rofi theme if rofi exists on the system
-if [ command -v rofi ]; then
-  ROFIDIR=$HOME/.config/rofi
-  
-  if [ ! -d "$ROFIDIR" ]; then
-    mkdir -p $ROFIDIR
-  fi
-  
-  ROFITHEMEPATH="$ROFIDIR/themes"
-  
-  if [ ! -d "$ROFITHEMEPATH" ]; then
-    mkdir -p $ROFITHEMEPATH
-  fi
-  
-  
-  cp "$SCRIPTPATH/nord.rasi" $ROFITHEMEPATH
-  
-  # preserve the old rofi config if there is one
-  if [ -f "$ROFIDIR/config.rasi" ]; then
-    mv "$ROFIDIR/config.rasi" "$ROFIDIR/config.rasi.old" 
-  fi
-  
-  echo "@theme $HOME/.config/rofi/themes/nord.rasi" > "$ROFIDIR/config.rasi"
-  
-fi
 
 #boot compton or picom if it exists
 if [ -x "$(command -v compton)" ]; then
