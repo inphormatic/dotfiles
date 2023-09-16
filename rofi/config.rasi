@@ -1,6 +1,6 @@
 configuration {
-/*	modi: "window,run,ssh";*/
-/*	font: "mono 12";*/
+  modi: "window,run,ssh";
+	font: "JetBrainsMono Nerd Font Medium 12";
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
@@ -53,11 +53,11 @@ configuration {
 /*	steal-focus: false;*/
 /*	application-fallback-icon: ;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
-/*	display-window: ;*/
+  display-window: "";
 /*	display-windowcd: ;*/
-/*	display-run: ;*/
+	display-run: "";
 /*	display-ssh: ;*/
-/*	display-drun: ;*/
+  display-drun: "";
 /*	display-combi: ;*/
 /*	display-keys: ;*/
 /*	display-filebrowser: ;*/
@@ -137,7 +137,7 @@ configuration {
 /*	me-accept-custom: "Control+MouseDPrimary";*/
   timeout {
       action: "kb-cancel";
-      delay:  0;
+      delay:  10;
   }
   filebrowser {
       directories-first: true;
