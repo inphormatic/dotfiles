@@ -186,6 +186,7 @@ else
   cd .. && rm -rf alacritty
 fi
 
+
 log 'info' 'Including dotfiles...'
 cp -TRa ./leftwm/. "$HOME/.config/leftwm"
 cp -TRa ./picom/. "$HOME/.config/picom"
