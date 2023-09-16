@@ -19,6 +19,22 @@ log 'info' "Installing $PKGS ..."
 sudo $INSTALLER $PKGS > /dev/null
 
 
+# Nerd Fonts
+if [[ ! -d '/usr/share/fonts/JetBrainsMono' ]]; then
+  log 'info' 'Downloading JetBrainsMono Nerd Fonts...'
+  curl -sLO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
+
+  log 'info' 'Unzipping JetBrainsMono...'
+  unzip -q JetBrainsMono.zip -d JetBrainsMono
+  rm -rf JetBrainsMono.zip
+
+  log 'info' 'Installing JetBrainsMono...'
+  sudo mv JetBrainsMono /usr/share/fonts
+else
+  log 'warn' 'JetBrainsMono already present into /usr/share/fonts. Skipping!'
+fi
+
+
 # Developmet tools
 declare -r DISTRO=$(find_distro_name)
 declare -Ar DEV_TOOLS=(
@@ -32,7 +48,7 @@ sudo $INSTALLER ${DEV_TOOLS[$DISTRO]} > /dev/null
 
 
 # Rust
-command -v rustup 1> /dev/null
+command -v rustup > /dev/null
 if [[ "$?" == 0 ]]; then
   log 'warn' 'Rust is already istalled. Skipping!'
 else
