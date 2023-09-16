@@ -1,4 +1,4 @@
-import = ["./theme.toml"]
+import = ["~/.config/alacritty/theme.toml"]
 
 live_config_reload = true
 window.opacity = 1.0
