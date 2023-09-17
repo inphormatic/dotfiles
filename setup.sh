@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source ./utils.sh
 
 clear
@@ -37,7 +37,8 @@ if [[ "$?" == 0 ]]; then
   log 'warn' 'Rust is already istalled. Skipping!'
 else
   log 'info' 'Installing Rust...'
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /dev/null | sh
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  source "$HOME/.cargo/env"
 fi
 
 
@@ -153,8 +154,8 @@ if [[ "$?" == 0 ]]; then
   log 'warn' 'Alacritty is already installed. Skipping!'
 else
   log 'info' 'Cloning Alacritty repo...'
-  git clone https://github.com/alacritty/alacritty.git > /dev/null
-  cd alacritty
+  git clone https://github.com/alacritty/alacritty.git ./alacritty-repo > /dev/null
+  cd alacritty-repo
 
   declare -Ar DEPS_BY_DISTRO=(
     ["arch"]="cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python"
@@ -183,7 +184,7 @@ else
   scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty-bindings.5.gz > /dev/null
 
   log 'success' 'Alacritty installed!'
-  cd .. && rm -rf alacritty
+  cd .. && rm -rf alacritty-repo
 fi
 
 
