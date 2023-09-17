@@ -73,6 +73,26 @@ else
 fi
 
 
+# Neovim
+command -v nvim > /dev/null
+if [[ "$?" == 0 ]]; then
+  log 'warn' 'Neovim is already installed. Skipping!'
+else
+  log 'info' 'Installing Neovim...'
+  curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+  mv nvim.appimage nvim
+  chmod u+x nvim
+  sudo mv nvim /usr/bin
+fi
+
+if [[ -d "$HOME/.config/nvim" ]]; then
+  log 'warn' 'A Neovim configuration is already present at ~/.config/nvim. Skipping!'
+else
+  log 'info' 'Cloning Neovim configuration...'
+  git clone https://github.com/inphormatic/dotfiles-neovim.git ~/.config/nvim
+fi
+
+
 # Leftwm
 command -v leftwm > /dev/null
 if [[ "$?" == 0 ]]; then
