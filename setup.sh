@@ -13,7 +13,7 @@ declare -r DISTRO=$(find_distro_name)
 declare -r PKGS='curl dunst feh i3 nnn nodejs picom polybar ripgrep rofi scdoc tmux unzip zsh'
 
 log 'info' "Installing $PKGS ..."
-sudo $INSTALLER $PKGS /dev/null
+sudo $INSTALLER $PKGS
 
 
 # Developmet tools
