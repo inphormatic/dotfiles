@@ -41,9 +41,9 @@ bindsym $mod+l focus right
 
 
 ## STARTUP
-exec_always --no-startup-id "xrandr -s 1920x1080"
-exec_always --no-startup-id "feh --bg-fill ~/.config/i3/wallpaper.jpg > /dev/null"
-exec_always --no-startup-id "polybar > /dev/null"
+exec_always "xrandr -s 1920x1080"
+exec_always "feh --bg-fill ~/.config/i3/wallpaper.jpg &> /dev/null"
+exec_always "polybar -c ~/.config/polybar/polybar.ini mainbar &> /dev/null &"
 
 
 
@@ -57,7 +57,7 @@ new_float pixel 2
 font xft:JetBrainsMono Nerd Font 11
 
 # Gaps
-gaps inner 8
+gaps inner 10
 
 # Floating Window
 floating_modifier $mod
