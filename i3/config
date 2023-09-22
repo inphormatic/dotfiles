@@ -1,0 +1,86 @@
+## KEY BINDINGS
+# Keys
+set $mod Mod4
+
+# change layout
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+w layout toggle split
+
+# kill focused window
+bindsym $mod+q kill
+
+# log out
+bindsym $mod+Shift+e exec "i3-msg exit"
+
+# move windows
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# reload config
+bindsym $mod+Shift+r reload
+
+# split orientation
+bindsym $mod+Ctrl+h split h
+bindsym $mod+Ctrl+v split v
+
+# start rofi
+bindsym $mod+p exec --no-startup-id "rofi -show run"
+
+# start terminal
+bindsym $mod+Return exec "gnome-terminal"
+
+# window focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+
+
+## STARTUP
+exec_always "xrandr -s 1920x1080"
+exec_always "feh --bg-fill ~/.config/i3/wallpaper.jpg"
+
+
+
+## UI
+# Borders
+hide_edge_borders none
+new_window pixel 2
+new_float pixel 2
+
+# Fonts
+font xft:JetBrainsMono Nerd Font 11
+
+# Gaps
+gaps inner 8
+
+# Floating Window
+floating_modifier $mod
+
+
+
+## GENERAL
+# Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
