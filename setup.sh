@@ -124,7 +124,6 @@ else
   scdoc < extra/man/alacritty.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty.5.gz > /dev/null
   scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty-bindings.5.gz > /dev/null
 
-  log 'success' 'Alacritty installed!'
   cd .. && rm -rf alacritty-repo
 fi
 
@@ -142,6 +141,7 @@ fi
 log 'info' 'Including dotfiles...'
 cp -TRa ./i3/. "$HOME/.config/i3"
 cp -TRa ./picom/. "$HOME/.config/picom"
+cp -TRa ./dunst/. "$HOME/.config/dunst"
 cp -TRa ./rofi/. "$HOME/.config/rofi"
 cp -TRa ./polybar/. "$HOME/.config/polybar"
 cp -TRa ./alacritty/. "$HOME/.config/alacritty"
