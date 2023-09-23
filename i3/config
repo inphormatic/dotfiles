@@ -13,6 +13,9 @@ bindsym $mod+q kill
 # log out
 bindsym $mod+Shift+e exec "i3-msg exit"
 
+# lock screen
+bindsym $mod+Shift+x exec "i3lock -e -c 051C2C"
+
 # move windows
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
@@ -49,7 +52,7 @@ bindsym $mod+l focus right
 exec_always --no-startup-id "xrandr -s 1920x1080"
 exec_always --no-startup-id "picom --experimental-backends &> /dev/null &"
 exec_always --no-startup-id "dunst &> /dev/null &"
-exec_always --no-startup-id "feh --bg-fill ~/.config/i3/wallpaper.jpg &> /dev/null"
+exec_always --no-startup-id "feh --bg-fill ~/.config/i3/wallpaper.png &> /dev/null"
 exec_always --no-startup-id "polybar -c ~/.config/polybar/polybar.ini mainbar &> /dev/null &"
 
 
