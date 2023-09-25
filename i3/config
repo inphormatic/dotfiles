@@ -16,6 +16,10 @@ bindsym $mod+Shift+e exec "i3-msg exit"
 # lock screen
 bindsym $mod+Shift+x exec "i3lock -e -c 051C2C"
 
+# minimize/maximize windows
+bindsym $mod+Ctrl+s move scratchpad
+bindsym $mod+Ctrl+e scratchpad show
+
 # move windows
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
