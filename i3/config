@@ -14,7 +14,7 @@ bindsym $mod+q kill
 bindsym $mod+Shift+e exec "i3-msg exit"
 
 # lock screen
-bindsym $mod+Shift+x exec "i3lock -e -c 051C2C"
+bindsym $mod+Shift+x exec "i3lock -n -e -c 051C2C"
 
 # minimize/maximize windows
 bindsym $mod+Ctrl+s move scratchpad
@@ -58,6 +58,7 @@ exec_always --no-startup-id "picom --experimental-backends &> /dev/null &"
 exec_always --no-startup-id "dunst &> /dev/null &"
 exec_always --no-startup-id "feh --bg-fill ~/.config/i3/wallpaper.png &> /dev/null"
 exec_always --no-startup-id "polybar -c ~/.config/polybar/polybar.ini mainbar &> /dev/null &"
+exec_always --no-startup-id "xss-lock --transfer-sleep-lock -- i3lock -n -e -c 051C2C"
 
 
 
