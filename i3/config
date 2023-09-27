@@ -57,7 +57,7 @@ exec_always --no-startup-id "xrandr -s 1920x1080"
 exec_always --no-startup-id "picom --experimental-backends &> /dev/null &"
 exec_always --no-startup-id "dunst &> /dev/null &"
 exec_always --no-startup-id "feh --bg-fill ~/.config/i3/wallpaper.png &> /dev/null"
-exec_always --no-startup-id "polybar -c ~/.config/polybar/polybar.ini mainbar &> /dev/null &"
+exec_always --no-startup-id "~/.config/polybar/launch.sh"
 exec_always --no-startup-id "xss-lock --transfer-sleep-lock -- i3lock -n -e -c 051C2C"
 
 
