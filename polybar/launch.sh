@@ -4,5 +4,5 @@ if type "xrandr"; then
     MONITOR=$m polybar -c "$HOME/.config/polybar/polybar.ini" --reload mainbar &> /dev/null &
   done
 else
-  polybar --reload example &
+  polybar -c "$HOME/.config/polybar/polybar.ini" --reload mainbar &> /dev/null &
 fi
