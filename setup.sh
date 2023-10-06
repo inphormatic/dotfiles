@@ -85,7 +85,7 @@ if [[ -d "$HOME/.config/nvim" ]]; then
   log 'info' 'A Neovim configuration is already present at ~/.config/nvim. Skipping!'
 else
   log 'info' 'Cloning Neovim configuration...'
-  git clone https://github.com/inphormatic/dotfiles-neovim.git ~/.config/nvim
+  git clone https://github.com/inphormatic/dotvim.git ~/.config/nvim
 fi
 
 
