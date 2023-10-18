@@ -58,6 +58,7 @@ exec_always --no-startup-id "picom --experimental-backends &> /dev/null &"
 exec_always --no-startup-id "dunst &> /dev/null &"
 exec_always --no-startup-id "feh --bg-fill ~/.config/i3/wallpaper.png &> /dev/null"
 exec_always --no-startup-id "~/.config/polybar/launch.sh"
+exec_always --no-startup-id "redshift -l 44.65:10.90 -b 0.8:0.6 -t 4000:4000"
 exec_always --no-startup-id "xss-lock --transfer-sleep-lock -- i3lock -n -e -c 051C2C"
 
 
