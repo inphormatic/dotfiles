@@ -4,6 +4,9 @@ live_config_reload = true
 window.opacity = 1.0
 
 
+[debug]
+renderer = "gles2_pure"
+
 [shell]
 program = "/bin/zsh"
 
