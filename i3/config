@@ -37,7 +37,7 @@ bindsym $mod+Ctrl+v split v
 bindsym $mod+p exec --no-startup-id "rofi -show run"
 
 # start terminal
-bindsym $mod+Return exec "gnome-terminal"
+bindsym $mod+Return exec "alacritty"
 
 # volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse set Master 5%+
