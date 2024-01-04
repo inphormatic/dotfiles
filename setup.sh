@@ -138,6 +138,7 @@ else
 
   log 'info' 'Building EWW Widgets...'
   cargo build --release --no-default-features --features x11
+  cd .. && rm -rf eww
 fi
 
 
