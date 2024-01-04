@@ -8,7 +8,7 @@ window.opacity = 1.0
 renderer = "gles2_pure"
 
 [shell]
-program = "/bin/zsh"
+program = "/urs/bin/tmux"
 
 
 [font]
