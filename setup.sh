@@ -10,7 +10,7 @@ declare -r DISTRO=$(find_distro_name)
 
 
 # Basic Packages
-declare -r PKGS='curl dunst feh i3 nnn nodejs picom polybar redshift ripgrep rofi scdoc tmux unzip zsh'
+declare -r PKGS='curl dunst fd feh i3 nodejs picom polybar redshift ripgrep rofi scdoc tmux unzip zsh'
 
 log 'info' "Installing $PKGS ..."
 sudo $INSTALLER $PKGS
@@ -44,12 +44,12 @@ if [[ "$?" == 0 ]]; then
   log 'info' 'Go is already installed. Skipping!'
 else
   log 'info' 'Downloading Go...'
-  curl -sLO https://go.dev/dl/go1.21.4.linux-amd64.tar.gz
+  curl -sLO https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
 
   log 'info' 'Installing Go...'
-  tar xfz go1.21.4.linux-amd64.tar.gz
+  tar xfz go1.21.5.linux-amd64.tar.gz
   sudo mv go /usr/local
-  rm -rf go1.21.4.linux-amd64.tar.gz
+  rm -rf go1.21.5.linux-amd64.tar.gz
 fi
 
 
@@ -89,42 +89,29 @@ else
 fi
 
 
-# Alacritty
-command -v alacritty > /dev/null
-if [[ "$?" == 0 ]]; then
-  log 'info' 'Alacritty is already installed. Skipping!'
+# QT
+if [[ -d "/dev/qt-build" ]]; then
+  log 'info' 'Qt seems to be already present at /dev/qt-build. Skipping!'
 else
-  log 'info' 'Cloning Alacritty repo...'
-  git clone https://github.com/alacritty/alacritty.git ./alacritty-repo > /dev/null
-  cd alacritty-repo
+  log 'info' 'Downloading Qt6...'
+  curl -sLO https://download.qt.io/official_releases/qt/6.6/6.6.1/single/qt-everywhere-src-6.6.1.tar.xz
 
-  declare -Ar DEPS_BY_DISTRO=(
-    ["arch"]="cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python"
-    ["solus"]="fontconfig-devel"
-    ["ubuntu"]="cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3"
-  )
+  log 'info' 'Extracting Qt6...'
+  tar xf qt-everywhere-src-6.6.1.tar.xz
 
-  log 'info' 'Installing dependencies'
-  sudo $INSTALLER ${DEPS_BY_DISTRO[$DISTRO]}
+  log 'info' 'Configuring Qt6 (This will take some time)...'
+  mkdir -p ~/dev/qt-build
+  ./qt-everywhere-src-6.6.1/configure
+  rm -rf qt-everywhere-src-6.6.1.tar.xz
+  cd ./qt-everywhere-src-6.6.1
 
-  log 'info' 'Building Alacritty...'
-  cargo build --release > /dev/null
+  log 'info' 'Building Qt...'
+  cmake --build . --parallel
 
-  log 'info' 'Adding Alacritty desktop entry...'
-  sudo cp target/release/alacritty /usr/bin/alacritty
-  sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
-  sudo desktop-file-install extra/linux/Alacritty.desktop
-  sudo update-desktop-database
-
-  log 'info' 'Installing Alacritty manpages...'
-  sudo mkdir -p /usr/local/share/man/man1
-  sudo mkdir -p /usr/local/share/man/man5
-  scdoc < extra/man/alacritty.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
-  scdoc < extra/man/alacritty-msg.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty-msg.1.gz > /dev/null
-  scdoc < extra/man/alacritty.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty.5.gz > /dev/null
-  scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty-bindings.5.gz > /dev/null
-
-  cd .. && rm -rf alacritty-repo
+  log 'info' 'Installing Qt libraries and tools'
+  cmake --install .
+  cd ..
+  rm -rf ./qt-everywhere-src-6.6.1
 fi
 
 
@@ -134,6 +121,9 @@ if [[ -d "$HOME/.oh-my-zsh" ]]; then
 else
   log 'info' 'Installing Oh-My-Zsh...'
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+  log 'info' 'Installing zsh-autosuggestions'
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
 
@@ -144,7 +134,6 @@ cp -TRa ./picom/. "$HOME/.config/picom"
 cp -TRa ./dunst/. "$HOME/.config/dunst"
 cp -TRa ./rofi/. "$HOME/.config/rofi"
 cp -TRa ./polybar/. "$HOME/.config/polybar"
-cp -TRa ./alacritty/. "$HOME/.config/alacritty"
 cp -a ./zsh/. "$HOME"
 
 

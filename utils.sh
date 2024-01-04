@@ -36,6 +36,7 @@ function find_installer() {
   declare -Ar distros=(
     ["alpine"]="apk add"
     ["arch"]="pacman -S"
+    ["fedora"]="dnf install -y"
     ["solus"]="eopkg install -y"
   )
 
