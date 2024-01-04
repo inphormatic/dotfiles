@@ -89,32 +89,6 @@ else
 fi
 
 
-# QT
-if [[ -d "/dev/qt-build" ]]; then
-  log 'info' 'Qt seems to be already present at /dev/qt-build. Skipping!'
-else
-  log 'info' 'Downloading Qt6...'
-  curl -sLO https://download.qt.io/official_releases/qt/6.6/6.6.1/single/qt-everywhere-src-6.6.1.tar.xz
-
-  log 'info' 'Extracting Qt6...'
-  tar xf qt-everywhere-src-6.6.1.tar.xz
-
-  log 'info' 'Configuring Qt6 (This will take some time)...'
-  mkdir -p ~/dev/qt-build
-  ./qt-everywhere-src-6.6.1/configure
-  rm -rf qt-everywhere-src-6.6.1.tar.xz
-  cd ./qt-everywhere-src-6.6.1
-
-  log 'info' 'Building Qt...'
-  cmake --build . --parallel
-
-  log 'info' 'Installing Qt libraries and tools'
-  cmake --install .
-  cd ..
-  rm -rf ./qt-everywhere-src-6.6.1
-fi
-
-
 # Oh-My-Zsh
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
   log 'info' 'Oh-My-Zsh is aleady installed. Skipping!'
