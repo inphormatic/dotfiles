@@ -161,6 +161,7 @@ cp -TRa ./dunst/. "$HOME/.config/dunst"
 cp -TRa ./rofi/. "$HOME/.config/rofi"
 cp -TRa ./polybar/. "$HOME/.config/polybar"
 cp -TRa ./alacritty/. "$HOME/.config/alacritty"
+cp -a ./tmux/. "$HOME"
 cp -a ./zsh/. "$HOME"
 
 
