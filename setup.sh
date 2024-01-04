@@ -89,6 +89,58 @@ else
 fi
 
 
+# Alacritty
+command -v alacritty > /dev/null
+if [[ "$?" == 0 ]]; then
+  log 'info' 'Alacritty is already installed. Skipping!'
+else
+  log 'info' 'Cloning Alacritty repo...'
+  git clone https://github.com/alacritty/alacritty.git ./alacritty-repo > /dev/null
+  cd alacritty-repo
+
+  declare -Ar DEPS_BY_DISTRO=(
+    ["arch"]="cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python"
+    ["solus"]="fontconfig-devel"
+    ["ubuntu"]="cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3"
+  )
+
+  log 'info' 'Installing dependencies'
+  sudo $INSTALLER ${DEPS_BY_DISTRO[$DISTRO]}
+
+  log 'info' 'Building Alacritty...'
+  cargo build --release > /dev/null
+
+  log 'info' 'Adding Alacritty desktop entry...'
+  sudo cp target/release/alacritty /usr/bin/alacritty
+  sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+  sudo desktop-file-install extra/linux/Alacritty.desktop
+  sudo update-desktop-database
+
+  log 'info' 'Installing Alacritty manpages...'
+  sudo mkdir -p /usr/local/share/man/man1
+  sudo mkdir -p /usr/local/share/man/man5
+  scdoc < extra/man/alacritty.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
+  scdoc < extra/man/alacritty-msg.1.scd | gzip -c | sudo tee /usr/local/share/man/man1/alacritty-msg.1.gz > /dev/null
+  scdoc < extra/man/alacritty.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty.5.gz > /dev/null
+  scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty-bindings.5.gz > /dev/null
+
+  cd .. && rm -rf alacritty-repo
+fi
+
+
+# EWW Widgets
+if [[ -d "$HOME/.config/eww" ]]; then
+  log 'info' 'EWW Widgets are already installed'
+else
+  log 'info' 'Cloning EWW Widgets...'
+  git clone https://github.com/elkowar/eww
+  cd eww
+
+  log 'info' 'Building EWW Widgets...'
+  cargo build --release --no-default-features --features x11
+fi
+
+
 # Oh-My-Zsh
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
   log 'info' 'Oh-My-Zsh is aleady installed. Skipping!'
@@ -108,6 +160,7 @@ cp -TRa ./picom/. "$HOME/.config/picom"
 cp -TRa ./dunst/. "$HOME/.config/dunst"
 cp -TRa ./rofi/. "$HOME/.config/rofi"
 cp -TRa ./polybar/. "$HOME/.config/polybar"
+cp -TRa ./alacritty/. "$HOME/.config/alacritty"
 cp -a ./zsh/. "$HOME"
 
 
