@@ -42,7 +42,7 @@ bindsym $mod+Return exec "gnome-terminal"
 # volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse set Master 5%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse set Master 5%-
-bindsym XF86AudioMute exec --no-startup-id amixer -D pulse Master 1+ toggle
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set Master 1+ toggle
 
 # window focus
 bindsym $mod+h focus left
