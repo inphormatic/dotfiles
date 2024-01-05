@@ -26,18 +26,6 @@ declare -Ar DEV_TOOLS=(
 log 'info' 'Installing development tools...'
 sudo $INSTALLER ${DEV_TOOLS[$DISTRO]}
 
-if [[ "$DISTRO" = "arch" ]]; then
-  log 'info' 'Installing additional packages for Arch Linux...'
-  sudo $INSTALLER man-db man-pages npm fuse2 fuse3 xorg-xrandr arandr
-
-  log 'info' 'Cloning Paru AUR helper...'
-  git clone https://aur.archlinux.org/paru.git
-  log 'info' 'Installing Paru...'
-  cd paru
-  makepkg -si
-  cd .. && rm -rf paru
-fi
-
 
 # Rust
 command -v rustup > /dev/null
@@ -62,6 +50,19 @@ else
   tar xfz go1.21.5.linux-amd64.tar.gz
   sudo mv go /usr/local
   rm -rf go1.21.5.linux-amd64.tar.gz
+fi
+
+# Additional packages for Arch Linux
+if [[ "$DISTRO" = "arch" ]]; then
+  log 'info' 'Installing additional packages for Arch Linux...'
+  sudo $INSTALLER man-db man-pages npm fuse2 fuse3 xorg-xrandr arandr
+
+  log 'info' 'Cloning Paru AUR helper...'
+  git clone https://aur.archlinux.org/paru.git
+  log 'info' 'Installing Paru...'
+  cd paru
+  makepkg -si
+  cd .. && rm -rf paru
 fi
 
 
