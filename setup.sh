@@ -18,13 +18,25 @@ sudo $INSTALLER $PKGS
 
 # Developmet tools
 declare -Ar DEV_TOOLS=(
-  ["arch"]="base-devel"
+  ["arch"]="--needed base-devel"
   ["solus"]="-c system.devel"
   ["ubuntu"]="build-essential"
 )
 
 log 'info' 'Installing development tools...'
 sudo $INSTALLER ${DEV_TOOLS[$DISTRO]}
+
+if [[ "$DISTRO" = "arch" ]]; then
+  log 'info' 'Installing additional packages for Arch Linux...'
+  sudo $INSTALLER man-db man-pages npm fuse2 fuse3
+
+  log 'info' 'Cloning Paru AUR helper...'
+  git clone https://aur.archlinux.org/paru.git
+  log 'info' 'Installing Paru...'
+  cd paru
+  makepkg -si
+  cd .. && rm -rf paru
+fi
 
 
 # Rust
