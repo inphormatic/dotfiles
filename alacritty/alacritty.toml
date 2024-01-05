@@ -7,9 +7,6 @@ window.opacity = 1.0
 [debug]
 renderer = "gles2_pure"
 
-[shell]
-program = "/urs/bin/tmux"
-
 
 [font]
 size = 12
