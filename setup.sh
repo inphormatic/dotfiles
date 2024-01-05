@@ -28,7 +28,7 @@ sudo $INSTALLER ${DEV_TOOLS[$DISTRO]}
 
 if [[ "$DISTRO" = "arch" ]]; then
   log 'info' 'Installing additional packages for Arch Linux...'
-  sudo $INSTALLER man-db man-pages npm fuse2 fuse3 xorg-xrandr
+  sudo $INSTALLER man-db man-pages npm fuse2 fuse3 xorg-xrandr arandr
 
   log 'info' 'Cloning Paru AUR helper...'
   git clone https://aur.archlinux.org/paru.git
