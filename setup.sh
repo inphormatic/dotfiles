@@ -10,7 +10,7 @@ declare -r DISTRO=$(find_distro_name)
 
 
 # Basic Packages
-declare -r PKGS='curl dunst fd feh i3 nodejs picom polybar redshift ripgrep rofi scdoc tmux unzip zsh'
+declare -r PKGS='curl dunst fd feh flameshot i3 nodejs picom polybar redshift ripgrep rofi scdoc tmux unzip zsh'
 
 log 'info' "Installing $PKGS ..."
 sudo $INSTALLER $PKGS
