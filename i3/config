@@ -20,6 +20,9 @@ bindsym $mod+Shift+x exec "i3lock -n -e -c 051C2C"
 bindsym $mod+Ctrl+s move scratchpad
 bindsym $mod+Ctrl+e scratchpad show
 
+# Toggle fullscreen
+bindsym $mod+f fullscreen toggle global
+
 # move windows
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
