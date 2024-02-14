@@ -1,24 +1,33 @@
+@import "colors.rasi"                                                                                                                                                               [39/54]
+
 * {
   border: 0;
   margin: 0;
   padding: 0;
   spacing: 0;
 
-  bg: #2E3440;
-  bg-alt: #3B4252;
-  fg: #81A1C1;
-  fg-alt: #EBCB8B;
-
+  alternate-background: @bg;
   background-color: @bg;
   text-color: @fg;
 }
 
 window {
+  anchor: center;
+  background-color: @bg;
+  fullscreen: true;
+  height: 720px;
+  location: center;
   transparency: "real";
+  x-offset: 0px;
+  y-offset: 0px;
+  width: 1280px;
 }
 
 mainbox {
+  background-color: transparent;
   children: [inputbar, listview];
+  enabled: true;
+  padding: 25%;
 }
 
 inputbar {
@@ -28,6 +37,7 @@ inputbar {
 
 entry {
   background-color: inherit;
+  enabled: true;
   padding: 12px 3px;
 }
 
@@ -37,19 +47,33 @@ prompt {
 }
 
 listview {
+  background-color: transparent;
+  columns: 1;
+  cycle: true;
+  dynamic: true;
+  enabled: true;
+  fixed-columns: true;
+  fixed-height: true;
+  layout: vertical;
   lines: 8;
 }
 
 element {
   children: [element-text];
+  enabled: true;
 }
 
 element-icon {
+  background-color: transparent;
   padding: 10px 10px;
+  size: 24px;
+  text-color: inherit;
 }
 
 element-text {
+  background-color: transparent;
   padding: 10px 10px;
+  text-color: inherit;
 }
 
 element-text selected {
