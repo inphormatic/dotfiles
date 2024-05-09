@@ -44,12 +44,12 @@ if [[ "$?" == 0 ]]; then
   log 'info' 'Go is already installed. Skipping!'
 else
   log 'info' 'Downloading Go...'
-  curl -sLO https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
+  curl -sLO https://go.dev/dl/go1.22.3.linux-amd64.tar.gz
 
   log 'info' 'Installing Go...'
-  tar xfz go1.22.0.linux-amd64.tar.gz
+  tar xfz go1.22.3.linux-amd64.tar.gz
   sudo mv go /usr/local
-  rm -rf go1.22.0.linux-amd64.tar.gz
+  rm -rf go1.22.3.linux-amd64.tar.gz
 fi
 
 # Additional packages for Arch Linux
