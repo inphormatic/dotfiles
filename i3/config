@@ -20,8 +20,15 @@ bindsym $mod+Shift+x exec "i3lock -n -e -c 051C2C"
 bindsym $mod+Ctrl+s move scratchpad
 bindsym $mod+Ctrl+e scratchpad show
 
+# resize window
+bindsym $mod+Right resize grow width 16 px or 16 ppt
+bindsym $mod+Up resize grow height 16 px or 16 ppt
+bindsym $mod+Down resize shrink height 16 px or 16 ppt
+bindsym $mod+Left resize shrink width 16 px or 16 ppt
+
+
 # Toggle fullscreen
-bindsym $mod+f fullscreen toggle global
+bindsym $mod+f fullscreen toggle
 
 # move windows
 bindsym $mod+Shift+h move left
