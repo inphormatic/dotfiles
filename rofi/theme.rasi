@@ -1,4 +1,4 @@
-@import "colors.rasi"                                                                                                                                                               [39/54]
+@import "colors.rasi"
 
 * {
   border: 0;

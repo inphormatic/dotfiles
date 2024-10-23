@@ -5,7 +5,7 @@ window.opacity = 1.0
 
 
 [debug]
-renderer = "gles2_pure"
+renderer = "Glsl3"
 
 
 [font]
