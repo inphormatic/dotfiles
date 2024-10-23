@@ -146,8 +146,15 @@ fi
 if [[ -d "$HOME/.config/eww" ]]; then
   log 'info' 'EWW Widgets are already installed'
 else
+  declare -Ar UI_PKGS=(
+    ["arch"]="gtk3 libdbusmenu"
+    ["solus"]="libdbusmenu-devel libgtk-3-devel"
+    ["ubuntu"]="libdbusmenu-gtk-dev libgtk-3-dev"
+  )
+
   log 'info' 'Installing UI libraries for eww widgets...'
-  sudo $INSTALLER libdbusmenu libdbusmenu-devel libgtk-3-devel libgtk-3-docs
+  sudo $INSTALLER ${UI_PKGS[$DISTRO]}
+
   log 'info' 'Cloning EWW Widgets...'
   git clone https://github.com/elkowar/eww
   cd eww
@@ -156,6 +163,33 @@ else
   cargo build --release --no-default-features --features x11
   chmod +x ./target/release/eww
   cd .. && mv ./eww "$HOME/.config"
+fi
+
+
+# Timeshift
+command -v timeshift > /dev/null
+if [[ "$?" == 0 ]]; then
+  log 'info' 'Timeshift is already installed'
+else
+  declare -Ar DEPS_PKGS=(
+    ["arch"]="meson help2man valac vte3 libgee json-c xapp rsync"
+    ["solus"]="meson help2man vala libte-devel libgee-devel libjson-glib-devel rsync xapp-devel rsync"
+    ["ubuntu"]="meson help2man gettext valac libvte-dev libgee-dev libjson-glib-dev libxapp-dev rsync"
+  )
+
+  log 'info' 'Installing libraries for Timeshift...'
+  sudo $INSTALLER ${DEPS_PKGS[$DISTRO]}
+
+  log 'info' 'Cloning Timeshift...'
+  git clone git@github.com:linuxmint/timeshift.git
+
+  log 'info' 'Installing Timeshift...'
+  cd ./timeshift
+  meson setup build
+  meson compile -C build
+  sudo meson install -C build
+
+  cd .. && rm -rf timeshift
 fi
 
 
