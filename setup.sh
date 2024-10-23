@@ -138,6 +138,7 @@ else
   scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty-bindings.5.gz > /dev/null
 
   cd .. && rm -rf alacritty-repo
+  alacritty migrate
 fi
 
 
@@ -145,13 +146,16 @@ fi
 if [[ -d "$HOME/.config/eww" ]]; then
   log 'info' 'EWW Widgets are already installed'
 else
+  log 'info' 'Installing UI libraries for eww widgets...'
+  sudo $INSTALLER libdbusmenu libdbusmenu-devel libgtk-3-devel libgtk-3-docs
   log 'info' 'Cloning EWW Widgets...'
   git clone https://github.com/elkowar/eww
   cd eww
 
   log 'info' 'Building EWW Widgets...'
   cargo build --release --no-default-features --features x11
-  cd .. && rm -rf eww
+  chmod +x ./target/release/eww
+  cd .. && mv ./eww "$HOME/.config"
 fi
 
 

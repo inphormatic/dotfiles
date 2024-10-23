@@ -1,7 +1,6 @@
+[general]
 import = ["~/.config/alacritty/theme.toml"]
-
 live_config_reload = true
-window.opacity = 1.0
 
 
 [debug]
@@ -15,6 +14,9 @@ size = 12
 family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
+
+[window]
+opacity = 1.0
 
 [window.padding]
 x = 12
